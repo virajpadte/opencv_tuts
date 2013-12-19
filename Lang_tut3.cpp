@@ -25,5 +25,5 @@ int main(){
 
     img.copy2(destination) is a method used to copy one image data to other.
 
-- Viraj Padte
+-Viraj Padte
 */
