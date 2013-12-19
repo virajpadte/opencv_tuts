@@ -44,7 +44,7 @@ int main(){
 
     This line will return a vector of 3 values of the 3 respective channels at pixel(100,200)
 
-- Viraj Padte
+-Viraj Padte
 
 */
 
