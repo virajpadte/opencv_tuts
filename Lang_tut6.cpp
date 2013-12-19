@@ -34,6 +34,6 @@ int main(){
     Playing with functions a mix of c and c++ functions.
 
 
-- Viraj Padte
+-Viraj Padte
 
 */
