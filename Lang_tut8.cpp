@@ -49,7 +49,7 @@ int main(){
 
 //Note:
 /*
-While working with random numbers make use of rand() in the following way:
+While working with random numbers make use of rand( ) in the following way:
 
 int x = rand()%100 - puts a upper limit on the output of the random number function.
 By default the lower limit is 0.
