@@ -25,7 +25,7 @@ int main(){
 //Note:
 /*
 
-Some more code on alternative declaration for images.
+ Some more code on alternative declaration for images.
 
 - Viraj Padte
 
