@@ -8,28 +8,37 @@ using namespace std;
 
 
 //Declaring functions:
-Mat colour_reduce(Mat img,int factor);
+Mat colour_reduce(Mat img,int factor,int flag);
+void colorReduce(cv::Mat &image, int div=64);
+
 
 //defining functions:
+Mat colour_reduce(Mat img,int factor,int flag){
+    int rows = img.rows;
+    int cols = img.cols*img.channels();
+    switch (flag){
 
-Mat colour_reduce(Mat img,int factor){
-    int case_flag = 0;
-    if(img.isContinuous()){
-        case_flag = 1;
-    }
-    else{
-        case_flag = 2;
-    }
+    case 1:
+        //Case for handling continuous images
+        cols = rows*cols;
+        rows = 1;
+        for(int i = 0; i< rows;i++){
+            uchar * img_pointer = img.ptr<uchar>(i);
+            for(int j = 0; j< cols;j++){
+                img_pointer[j] =img_pointer[j]/factor*factor + factor/2;
+            }
+        }
+        break;
 
-    switch(case_flag){
-        case 1:{
-            cout<<"Continuous flag set"<<endl;
-            break;
+    case 2:
+        //Case for handling padded images
+        for(int i = 0;i< rows;i++){
+            uchar * img_pointer = img.ptr<uchar>(i);
+            for(int j = 0; j< cols;j++){
+                img_pointer[j] =img_pointer[j]/factor*factor + factor/2;
+            }
         }
-        case 2:{
-            cout<<"Continuous flag reset"<<endl;
-            break;
-        }
+        break;
     }
     return img;
 }
@@ -38,16 +47,24 @@ Mat colour_reduce(Mat img,int factor){
 
 int main(){
     Mat img = imread("sample_img.jpg");
-    cout<<"Padding flag: "<<img.isContinuous()<<endl;
+    imshow("Original image",img);
+    int case_flag;
     if(img.isContinuous()){
-        cout<<"\n\nThe image is not padded"<<endl;
+        cout<<"The image is continuous i.e unpadded."<<endl;
+        case_flag = 1;
     }
     else{
-        cout<<"\n\nThe image is padded"<<endl;
+        cout<<"The image is padded"<<endl;
+        case_flag = 2;
     }
-    colour_reduce(img,64);
+
+    Mat pr_img = colour_reduce(img,64,case_flag);
+    imshow("Processed Image",pr_img);
+    waitKey(0);
+    destroyAllWindows();
     return 0;
 }
+
 
 
 //Note:
